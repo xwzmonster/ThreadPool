@@ -11,8 +11,7 @@ stress_test
 benchmark
 threadpool_test
 threadpool_benchmark
-.codex
-
+threadpool_pool_detailed.c
 # core dumps
 core
 core.*
