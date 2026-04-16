@@ -1,0 +1,27 @@
+# build artifacts
+*.o
+*.out
+*.a
+*.so
+
+# executables
+basic_test
+shutdown_test
+stress_test
+benchmark
+threadpool_test
+threadpool_benchmark
+.codex
+
+# core dumps
+core
+core.*
+
+# temporary files
+*.tmp
+*.log
+
+# editor / OS
+.DS_Store
+.vscode/
+.idea/
