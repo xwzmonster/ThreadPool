@@ -170,14 +170,16 @@ static int __threads_create(threadpool_t *pool, int thrd_count) {
                 }
             }
             pool->thrd_count = i; // 保证后续清理只处理已经成功创建出来的线程
-            pthread_attr_destroy(&attr);
-            if (i == thrd_count)
+            if (i == thrd_count){                
+                pthread_attr_destroy(&attr);
                 return 0;
+            }
             __threads_terminate(pool);
             free(pool->threads);
             pool->threads = NULL;
             pool->thrd_count = 0;
         }
+        pthread_attr_destroy(&attr);
         ret = -1;
     }
     return ret;
@@ -185,6 +187,9 @@ static int __threads_create(threadpool_t *pool, int thrd_count) {
 
 // 线程池慢慢关闭, 停止接收新任务, 但把队列里的任务做完
 void threadpool_shutdown_slow(threadpool_t * pool) {
+    if(!pool) {
+        return ;
+    }
     task_queue_t* queue = pool->task_queue;
 
     pthread_mutex_lock(&queue->mutex);
@@ -197,6 +202,9 @@ void threadpool_shutdown_slow(threadpool_t * pool) {
 
 // 立即关闭---停止接收新任务, worker 不再取新任务；已经在执行的任务继续跑完, 队列里剩下的任务丢弃
 void threadpool_shutdown_immediately(threadpool_t* pool) {
+    if(!pool) {
+        return ;
+    }
     task_queue_t* queue = pool->task_queue;
 
     pthread_mutex_lock(&queue->mutex);
