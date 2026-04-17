@@ -158,9 +158,9 @@
 示例输出：
 
 ```text
-Tasks: 100000
-Time: 143 ms
-Throughput: 699301 tasks/sec
+Tasks: 1000000
+Time: 2616 ms
+Throughput: 382263 tasks/sec
 ```
 
 注意：

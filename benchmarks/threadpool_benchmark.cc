@@ -14,7 +14,7 @@ static void task(void* arg) {
 }
 
 int main() {
-    const int N = 100000;
+    const int N = 1000000;
 
     threadpool_t* pool = threadpool_create(4);
     if (!pool) {
